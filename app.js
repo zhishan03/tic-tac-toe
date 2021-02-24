@@ -8,8 +8,8 @@ const X_Player = "X";
 let tied = 1;
 let currentPlayer = O_Player;
 
+turnText.innerText = `${currentPlayer}'s turn!`
 const drawBoard = () => {
-    turnText.innerText = `${currentPlayer}'s turn!`
     boxes.forEach((box, index) => {
         let styleString = '';
         if (index < 3) {
@@ -54,9 +54,11 @@ const boxClicked = (e) => {
         }
     }
     if(tied == 1) {
+        turnText.innerText = '';
         gameText.innerText = 'Tied!';
         return;
     }
+    console.log(currentPlayer);
     turnText.innerText = `${currentPlayer}'s turn!`
 }
 
@@ -72,19 +74,22 @@ const playerHasWon = () => {
             return true;
         }
     }
+    if(spaces[4] === currentPlayer) {
+        if(spaces[2] === currentPlayer && spaces[6] === currentPlayer) {
+            return true;
+        }
+        if(spaces[1] === currentPlayer && spaces[7] === currentPlayer) {
+            return true;
+        }
+        if(spaces[3] === currentPlayer && spaces[5] === currentPlayer) {
+            return true;
+        }
+    }
     if(spaces[8] === currentPlayer) {
         if(spaces[2] === currentPlayer && spaces[5] === currentPlayer) {
             return true;
         }
         if(spaces[6] === currentPlayer && spaces[7] === currentPlayer) {
-            return true;
-        }
-    }
-    if(spaces[4] === currentPlayer) {
-        if(spaces[1] === currentPlayer && spaces[7] === currentPlayer) {
-            return true;
-        }
-        if(spaces[3] === currentPlayer && spaces[5] === currentPlayer) {
             return true;
         }
     }
